@@ -19,6 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4004485536719594}
+  - component: {fileID: 114610211396067754}
+  - component: {fileID: 114376290965508972}
   m_Layer: 0
   m_Name: banco
   m_TagString: Untagged
@@ -36,6 +38,7 @@ GameObject:
   - component: {fileID: 4646720886332238}
   - component: {fileID: 33199775000963234}
   - component: {fileID: 23065451585064210}
+  - component: {fileID: 64808081072415294}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -112,3 +115,43 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865760291292632}
   m_Mesh: {fileID: 4300000, guid: c148b88cadd124a41a91ccc205786323, type: 3}
+--- !u!64 &64808081072415294
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1865760291292632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: c148b88cadd124a41a91ccc205786323, type: 3}
+--- !u!114 &114376290965508972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105188510463732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406c3234344da9c42ac94097c57d6d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114610211396067754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105188510463732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2f815897861cf438a5008ea24fce86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveLocationPrefab: {fileID: 0}
+  tileHighlightPrefab: {fileID: 1015413396241664, guid: 6294771d74860df40a3fc58f33421d71,
+    type: 2}
+  attackLocationPrefab: {fileID: 0}
