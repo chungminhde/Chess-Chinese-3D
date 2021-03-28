@@ -4,30 +4,7 @@ using UnityEngine;
 
 public class Geometry {
 
-    private static Geometry _instance;
-
-    public static Geometry Instance()
-    {
-        if (_instance == null)
-        {
-            _instance = new Geometry();
-        }
-
-        return _instance;
-    }
-
-    static public void CreateBoard ()
-    {
-        // col
-        for(float i = -3.5f; i <= 3.5; i += 0.875f)
-        {
-            //row 
-            for(float j = 1.0f; j<= 10.0f; j++)
-            {
-                
-            }
-        }
-    }
+  
 
 
     static public Vector3 PointFromGrid(Vector2Int gridPoint)
