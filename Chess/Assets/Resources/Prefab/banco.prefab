@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406c3234344da9c42ac94097c57d6d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pawnPrefab: {fileID: 114221945357522126, guid: f548171215aae6b4783015b948309bf1,
+    type: 2}
 --- !u!114 &114610211396067754
 MonoBehaviour:
   m_ObjectHideFlags: 1
