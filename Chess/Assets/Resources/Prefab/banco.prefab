@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1105188510463732}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 5.5}
+  m_LocalPosition: {x: 0.36306846, y: 0.27351284, z: 1.4368572}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4646720886332238}
@@ -140,9 +140,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406c3234344da9c42ac94097c57d6d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawnPrefab: {fileID: 114341583468119928, guid: f548171215aae6b4783015b948309bf1,
+  RPawnPrefab: {fileID: 114341583468119928, guid: f548171215aae6b4783015b948309bf1,
     type: 2}
-  horsePrefab: {fileID: 114010119451352874, guid: c49b6f9c95976b74d8c4e81f831f61f6,
+  RKingPrefab: {fileID: 114813111297665456, guid: 2e170a5eaa404574780ad09bfa3942d6,
+    type: 2}
+  RAdvisorPrefab: {fileID: 114409723556727270, guid: eb13c57c225f93e4b8295ec7da3ed936,
+    type: 2}
+  RElephantPrefab: {fileID: 114121282281182172, guid: 8e2e45540712b29448275fc65cd3c134,
+    type: 2}
+  RHorsePrefab: {fileID: 114705976385200178, guid: 6231d1ce13ed2e9449b87e59f05d313e,
+    type: 2}
+  RRookPrefab: {fileID: 114631486995527226, guid: 61f8e855d99b1d240ac6374aa2dfd05b,
+    type: 2}
+  RCannonPrefab: {fileID: 114551400494183862, guid: ec78086fce842e84db9df8cbbe1f9de3,
+    type: 2}
+  BPawnPrefab: {fileID: 114250569725534022, guid: bfb5fe3bcb2a7294fa797d9d8916a840,
+    type: 2}
+  BKingPrefab: {fileID: 114884500481476864, guid: 0d26e71d67e0f6540a55a5631030aaa6,
+    type: 2}
+  BAdvisorPrefab: {fileID: 114886281456918908, guid: df04a9e267a6bfd4e89dad22f690dae6,
+    type: 2}
+  BElephantPrefab: {fileID: 114002303258846876, guid: 3efdcd4f15757c943bd36d9a72e582d7,
+    type: 2}
+  BHorsePrefab: {fileID: 114010119451352874, guid: c49b6f9c95976b74d8c4e81f831f61f6,
+    type: 2}
+  BRookPrefab: {fileID: 114586759464718806, guid: 69aedeadf02d1bc46b027f7c8acf5f12,
+    type: 2}
+  BCannonPrefab: {fileID: 114914900700768770, guid: c7e82071cc551dc4dab0e76e75710c2a,
     type: 2}
 --- !u!114 &114610211396067754
 MonoBehaviour:

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class RRook : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public StartPosConfig config;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
