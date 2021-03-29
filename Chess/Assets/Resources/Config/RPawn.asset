@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad6acbd606f1454dbe2a4ff6be06d51, type: 3}
-  m_Name: Pawn
+  m_Name: RPawn
   m_EditorClassIdentifier: 
   PosX: 4
   PosY: 0000000002000000040000000600000008000000

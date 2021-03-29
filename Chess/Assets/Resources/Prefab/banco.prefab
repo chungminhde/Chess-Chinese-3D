@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865760291292632}
   m_LocalRotation: {x: -0.7071068, y: -0.7071068, z: 0, w: 0}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.001, y: 0, z: -0.045}
   m_LocalScale: {x: -9.352039, y: -460.39606, z: -499.46182}
   m_Children: []
   m_Father: {fileID: 4004485536719594}
@@ -140,7 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406c3234344da9c42ac94097c57d6d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawnPrefab: {fileID: 114221945357522126, guid: f548171215aae6b4783015b948309bf1,
+  pawnPrefab: {fileID: 114341583468119928, guid: f548171215aae6b4783015b948309bf1,
+    type: 2}
+  horsePrefab: {fileID: 114010119451352874, guid: c49b6f9c95976b74d8c4e81f831f61f6,
     type: 2}
 --- !u!114 &114610211396067754
 MonoBehaviour:
