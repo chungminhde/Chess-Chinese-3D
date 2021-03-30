@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4482952261311354}
   - component: {fileID: 33592307549542800}
   - component: {fileID: 23421447091748868}
+  - component: {fileID: 64129781859942622}
   m_Layer: 0
   m_Name: Cylinder.001
   m_TagString: Untagged
@@ -50,14 +51,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1871161974932580}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -6.288833, y: 3.1380386, z: -1.0852526}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 4482952261311354}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4482952261311354
 Transform:
   m_ObjectHideFlags: 1
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291348924710412}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.64898133, y: -0.63277286, z: -1.5060209}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 33.757736}
   m_Children: []
   m_Father: {fileID: 4328988138271286}
@@ -113,6 +114,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291348924710412}
   m_Mesh: {fileID: 4300000, guid: 5c1b4967709c2fb44b5d4f8e68021b85, type: 3}
+--- !u!64 &64129781859942622
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291348924710412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 5c1b4967709c2fb44b5d4f8e68021b85, type: 3}
 --- !u!114 &114121282281182172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,4 +139,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5891c4335010cc47a5ab1dcd5841d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 0}
+  config: {fileID: 11400000, guid: cfc0acde53213a746b13c0a65560d2f5, type: 2}

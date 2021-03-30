@@ -12,7 +12,7 @@ public class Geometry {
         
         float x = -3.5f + 0.875f * (float)gridPoint.x;
         float z =  1.0f * gridPoint.y;
-        return new Vector3(x, 0, z);
+        return new Vector3(x, 0.17f, z);
     }
 
     static public Vector2Int GridPoint(int col, int row)
@@ -24,7 +24,7 @@ public class Geometry {
     {
         //int col = ((int)(point.x / 0.875f)) + 4;
         //Thêm 0.075 fix bug độ nhạy
-        int col = ((int)(point.x / 0.8f)) + 4;
+        int col = ((int)(point.x / 0.85f)) + 4;
 
         //int row = Mathf.FloorToInt(point.z);
         //thêm 0.1 fix bug độ nhạy

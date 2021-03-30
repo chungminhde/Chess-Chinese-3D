@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad6acbd606f1454dbe2a4ff6be06d51, type: 3}
   m_Name: BHorse
   m_EditorClassIdentifier: 
-  PosX: 0
-  PosY: 
-  Name: 0
+  PosX: 10
+  PosY: 0100000007000000
+  Name: 12
