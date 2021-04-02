@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class MoveSelector : MonoBehaviour {
 
-    public GameObject moveLocationPrefab;
+  //  public GameObject moveLocationPrefab;
     public GameObject tileHighlightPrefab;
     public GameObject attackLocationPrefab;
 
     private GameObject tileHighlight;
     private GameObject movingPiece;
+
+    private List<Vector2Int> moveLocations;
+    private List<GameObject> locationHighlights;
 
     void Start () {
         //this.enabled = false;
@@ -30,15 +33,28 @@ public class MoveSelector : MonoBehaviour {
             
             tileHighlight.SetActive(true);
             tileHighlight.transform.position = Geometry.PointFromGrid(gridPoint);
-            Debug.LogError(gridPoint);
             if (Input.GetMouseButtonDown(0))
             {
-                GameObject selectedPiece =GameManager.instance.PieceAtGrid(gridPoint);
-                if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectedPiece))
+                Debug.Log(gridPoint);
+
+
+                // Reference Point 2: check for valid move location
+                if (!moveLocations.Contains(gridPoint))
                 {
-                    GameManager.instance.SelectPiece(selectedPiece);
-                    // Reference Point 1: add ExitState call here later
+                    return;
                 }
+
+                if (GameManager.instance.PieceAtGrid(gridPoint) == null)
+                {
+                    GameManager.instance.Move(movingPiece, gridPoint);
+                }
+                else
+                {
+                    GameManager.instance.CapturePieceAt(gridPoint);
+                    GameManager.instance.Move(movingPiece, gridPoint);
+                }
+                // Reference Point 3: capture enemy piece here later
+                ExitState();
             }
         }
         else
@@ -50,5 +66,62 @@ public class MoveSelector : MonoBehaviour {
     public void EnterState()
     {
         enabled = true;
+    }
+
+    public void EnterState(GameObject piece)
+    {
+        movingPiece = piece;
+        this.enabled = true;
+
+        moveLocations = GameManager.instance.MovesForPiece(movingPiece);
+        locationHighlights = new List<GameObject>();
+
+        if (moveLocations.Count == 0)
+        {
+            CancelMove();
+        }
+
+        foreach (Vector2Int loc in moveLocations)
+        {
+            GameObject highlight;
+            if (GameManager.instance.PieceAtGrid(loc))
+            {
+                highlight = Instantiate(attackLocationPrefab, Geometry.PointFromGrid(loc), Quaternion.identity, gameObject.transform);
+            }
+            else
+            {
+         //       highlight = Instantiate(moveLocationPrefab, Geometry.PointFromGrid(loc), Quaternion.identity, gameObject.transform);
+            }
+          //  locationHighlights.Add(highlight);
+        }
+    }
+
+    private void ExitState()
+    {
+        this.enabled = false;
+        TileSelector selector = GetComponent<TileSelector>();
+        tileHighlight.SetActive(false);
+        GameManager.instance.DeselectPiece(movingPiece);
+        movingPiece = null;
+        GameManager.instance.NextPlayer();
+        selector.EnterState();
+        foreach (GameObject highlight in locationHighlights)
+        {
+            Destroy(highlight);
+        }
+    }
+
+    private void CancelMove()
+    {
+        this.enabled = false;
+
+        foreach (GameObject highlight in locationHighlights)
+        {
+            Destroy(highlight);
+        }
+
+        GameManager.instance.DeselectPiece(movingPiece);
+        TileSelector selector = GetComponent<TileSelector>();
+        selector.EnterState();
     }
 }

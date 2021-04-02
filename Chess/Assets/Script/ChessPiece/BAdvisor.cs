@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BAdvisor : MonoBehaviour {
+public class BAdvisor : Piece {
 
-    public StartPosConfig config;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public override List<Vector2Int> MoveLocations(Vector2Int gridPoint)
+    {
+        List<Vector2Int> locations = new List<Vector2Int>();
+
+        return locations;
+    }
 }
