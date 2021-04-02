@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         List<Vector2Int> locations = piece.MoveLocations(gridPoint);
 
         // filter out offboard locations
-        locations.RemoveAll(gp => gp.x < 0 || gp.x > 9 || gp.y < 0 || gp.y > 9);
+        locations.RemoveAll(gp => gp.x < 0 || gp.x >= 9 || gp.y < 0 || gp.y > 9);
 
         // filter out locations with friendly piece
         locations.RemoveAll(gp => FriendlyPieceAt(gp));
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
     public GameObject PieceAtGrid(Vector2Int gridPoint)
     {
         Debug.Log(gridPoint);
-        if (gridPoint.x >= 10 || gridPoint.y >= 10 || gridPoint.x < 0 || gridPoint.y < 0)
+        if (gridPoint.x > 8 || gridPoint.y > 9 || gridPoint.x < 0 || gridPoint.y < 1)
         {
             return null;
         }
