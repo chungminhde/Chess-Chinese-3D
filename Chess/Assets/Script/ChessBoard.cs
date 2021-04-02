@@ -21,9 +21,12 @@ public class ChessBoard : MonoBehaviour {
     public BRook BRookPrefab;
     public BCannon BCannonPrefab;
 
-	// Use this for initialization
+    public Material defaultMaterial;
+    public Material selectedMaterial;
 
-	void Start () {
+    // Use this for initialization
+
+    void Start () {
         GenerateChessBoard();
 
     }
@@ -31,6 +34,12 @@ public class ChessBoard : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void SelectPiece(GameObject piece)
+    {
+        MeshRenderer renderers = piece.GetComponentInChildren<MeshRenderer>();
+        renderers.material = selectedMaterial;
+    }
     void GenerateChessBoard()
     {
         // Red Pawn

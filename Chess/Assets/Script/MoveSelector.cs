@@ -26,16 +26,29 @@ public class MoveSelector : MonoBehaviour {
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 point = hit.point;
-            Debug.Log(point);
             Vector2Int gridPoint = Geometry.GridFromPoint(point);
-            Debug.LogError(gridPoint);
+            
             tileHighlight.SetActive(true);
             tileHighlight.transform.position = Geometry.PointFromGrid(gridPoint);
-
+            Debug.LogError(gridPoint);
+            if (Input.GetMouseButtonDown(0))
+            {
+                GameObject selectedPiece =GameManager.instance.PieceAtGrid(gridPoint);
+                if (GameManager.instance.DoesPieceBelongToCurrentPlayer(selectedPiece))
+                {
+                    GameManager.instance.SelectPiece(selectedPiece);
+                    // Reference Point 1: add ExitState call here later
+                }
+            }
         }
         else
         {
             tileHighlight.SetActive(false);
         }
+        
+    }
+    public void EnterState()
+    {
+        enabled = true;
     }
 }
