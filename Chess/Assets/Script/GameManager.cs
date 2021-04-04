@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        pieces = new GameObject[9, 10];
+        pieces = new GameObject[9, 11];
 
         red = new Player("red", true);
         black = new Player("black", false);
@@ -79,7 +79,9 @@ public class GameManager : MonoBehaviour
         List<Vector2Int> locations = piece.MoveLocations(gridPoint);
 
         // filter out offboard locations
-        locations.RemoveAll(gp => gp.x < 0 || gp.x >= 9 || gp.y < 0 || gp.y > 9);
+        // x = 0 -> 8
+        // y = 1 -> 10
+        locations.RemoveAll(gp => gp.x < 0 || gp.x > 8 || gp.y < 1 || gp.y > 10);
 
         // filter out locations with friendly piece
         locations.RemoveAll(gp => FriendlyPieceAt(gp));
@@ -139,20 +141,22 @@ public class GameManager : MonoBehaviour
 
     public GameObject PieceAtGrid(Vector2Int gridPoint)
     {
-        Debug.Log(gridPoint);
-        if (gridPoint.x > 8 || gridPoint.y > 9 || gridPoint.x < 0 || gridPoint.y < 1)
+     //   Debug.Log(gridPoint);
+        // x = 0 -> 8
+        // y = 1 -> 10
+        if (gridPoint.x > 8 || gridPoint.y > 10 || gridPoint.x < 0 || gridPoint.y < 1)
         {
             return null;
         }
-
+       // Debug.LogError(gridPoint);
         return pieces[gridPoint.x, gridPoint.y];
     }
 
     public Vector2Int GridForPiece(GameObject piece)
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 9; i++)
         {
-            for (int j = 1; j < 10; j++)
+            for (int j = 1; j < 11; j++)
             {
                 if (pieces[i, j] == piece)
                 {
