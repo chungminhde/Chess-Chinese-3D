@@ -110,7 +110,16 @@ public class GameManager : MonoBehaviour
 
     public void CapturePieceAt(Vector2Int gridPoint)
     {
- 
+        GameObject pieceToCapture = PieceAtGrid(gridPoint);
+        //if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
+        //{
+        //    Debug.Log(currentPlayer.name + " wins!");
+        //    Destroy(board.GetComponent<TileSelector>());
+        //    Destroy(board.GetComponent<MoveSelector>());
+        //}
+        currentPlayer.capturedPieces.Add(pieceToCapture);
+        pieces[gridPoint.x, gridPoint.y] = null;
+        Destroy(pieceToCapture);
     }
 
     public void SelectPiece(GameObject piece)
@@ -143,7 +152,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < 8; i++)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 1; j < 10; j++)
             {
                 if (pieces[i, j] == piece)
                 {
@@ -234,12 +243,13 @@ public class GameManager : MonoBehaviour
         //    var position = Geometry.PointFromGrid(new Vector2Int(BPawnPrefab.config.PosY[i], BPawnPrefab.config.PosX));
         //    Instantiate(BPawnPrefab, position, Quaternion.identity);
         //}
-        //// Black Cannon
-        //for (int i = 0; i < BCannonPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(BCannonPrefab.config.PosY[i], BCannonPrefab.config.PosX));
-        //    Instantiate(BCannonPrefab, position, Quaternion.identity);
-        //}
+        // Black Cannon
+        for (int i = 0; i < BCannonPrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(BCannonPrefab.gameObject, BCannonPrefab.config.PosY[i], BCannonPrefab.config.PosX);
+            black.pieces.Add(pieceObject);
+            pieces[BCannonPrefab.config.PosY[i], BCannonPrefab.config.PosX] = pieceObject;
+        }
         //// Black Advisor
         //for (int i = 0; i < BAdvisorPrefab.config.PosY.Length; i++)
         //{
