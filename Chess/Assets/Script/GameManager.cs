@@ -223,13 +223,13 @@ public class GameManager : MonoBehaviour
             red.pieces.Add(pieceObject);
             pieces[RElephantPrefab.config.PosY[i], RElephantPrefab.config.PosX] = pieceObject;
         }
-        //// Red horse
-        //for (int i = 0; i < RHorsePrefab.config.PosY.Length; i++)
-        //{
-        //    GameObject pieceObject = board.AddPiece(RHorsePrefab.gameObject, RHorsePrefab.config.PosY[i], RHorsePrefab.config.PosX);
-        //    red.pieces.Add(pieceObject);
-        //    pieces[RHorsePrefab.config.PosY[i], RHorsePrefab.config.PosX] = pieceObject;
-        //}
+        // Red horse
+        for (int i = 0; i < RHorsePrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(RHorsePrefab.gameObject, RHorsePrefab.config.PosY[i], RHorsePrefab.config.PosX);
+            red.pieces.Add(pieceObject);
+            pieces[RHorsePrefab.config.PosY[i], RHorsePrefab.config.PosX] = pieceObject;
+        }
         // Red Rook
         for (int i = 0; i < RRookPrefab.config.PosY.Length; i++)
         {
@@ -281,8 +281,9 @@ public class GameManager : MonoBehaviour
         // Black Rook
         for (int i = 0; i < BRookPrefab.config.PosY.Length; i++)
         {
-            var position = Geometry.PointFromGrid(new Vector2Int(BRookPrefab.config.PosY[i], BRookPrefab.config.PosX));
-            Instantiate(BRookPrefab, position, Quaternion.identity);
+            GameObject pieceObject = board.AddPiece(BRookPrefab.gameObject, BRookPrefab.config.PosY[i], BRookPrefab.config.PosX);
+            black.pieces.Add(pieceObject);
+            pieces[BRookPrefab.config.PosY[i], BRookPrefab.config.PosX] = pieceObject;
         }
         //Black King
         for (int i = 0; i < BKingPrefab.config.PosY.Length; i++)

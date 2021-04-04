@@ -66,6 +66,7 @@ public class MoveSelector : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 // Reference Point 2: check for valid move location
+                 
                 if (!moveLocations.Contains(gridPoint))
                 {
                     return;
@@ -93,7 +94,6 @@ public class MoveSelector : MonoBehaviour
     private void CancelMove()
     {
         this.enabled = false;
-
         foreach (GameObject highlight in locationHighlights)
         {
             Destroy(highlight);
@@ -110,6 +110,10 @@ public class MoveSelector : MonoBehaviour
         this.enabled = true;
 
         moveLocations = GameManager.instance.MovesForPiece(movingPiece);
+        foreach(var loc in moveLocations)
+        {
+            Debug.LogError(loc);
+        }
         locationHighlights = new List<GameObject>();
 
         if (moveLocations.Count == 0)
