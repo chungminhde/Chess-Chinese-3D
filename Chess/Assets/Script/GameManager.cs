@@ -190,59 +190,63 @@ public class GameManager : MonoBehaviour
 
     void GenerateChessBoard()
     {
-        //// Red Pawn
-        //for (int i = 0; i < RPawnPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(RPawnPrefab.config.PosY[i], RPawnPrefab.config.PosX));
+        //Red Pawn
+        for (int i = 0; i < RPawnPrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(RPawnPrefab.gameObject, RPawnPrefab.config.PosY[i], RPawnPrefab.config.PosX);
+            red.pieces.Add(pieceObject);
+            pieces[RPawnPrefab.config.PosY[i], RPawnPrefab.config.PosX] = pieceObject;
 
-        //    Instantiate(RPawnPrefab, position, Quaternion.identity);
-
-        //}
+        }
         // Red Cannon
         for (int i = 0; i < RCannonPrefab.config.PosY.Length; i++)
         {
-            //  var position = Geometry.PointFromGrid(new Vector2Int(RCannonPrefab.config.PosY[i], RCannonPrefab.config.PosX));
-            // Instantiate(RCannonPrefab, position, Quaternion.identity);
             GameObject pieceObject = board.AddPiece(RCannonPrefab.gameObject, RCannonPrefab.config.PosY[i], RCannonPrefab.config.PosX);
             red.pieces.Add(pieceObject);
             pieces[RCannonPrefab.config.PosY[i], RCannonPrefab.config.PosX] = pieceObject;
         }
         // Red Advisor
-        //for (int i = 0; i < RAdvisorPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(RAdvisorPrefab.config.PosY[i], RAdvisorPrefab.config.PosX));
-        //    Instantiate(RAdvisorPrefab, position, Quaternion.identity);
-        //}
-        //// Red Elephant
-        //for (int i = 0; i < RElephantPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(RElephantPrefab.config.PosY[i], RElephantPrefab.config.PosX));
-        //    Instantiate(RElephantPrefab, position, Quaternion.identity);
-        //}
+        for (int i = 0; i < RAdvisorPrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(RAdvisorPrefab.gameObject, RAdvisorPrefab.config.PosY[i], RAdvisorPrefab.config.PosX);
+            red.pieces.Add(pieceObject);
+            pieces[RAdvisorPrefab.config.PosY[i], RAdvisorPrefab.config.PosX] = pieceObject;
+        }
+        // Red Elephant
+        for (int i = 0; i < RElephantPrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(RElephantPrefab.gameObject, RElephantPrefab.config.PosY[i], RElephantPrefab.config.PosX);
+            red.pieces.Add(pieceObject);
+            pieces[RElephantPrefab.config.PosY[i], RElephantPrefab.config.PosX] = pieceObject;
+        }
         //// Red horse
         //for (int i = 0; i < RHorsePrefab.config.PosY.Length; i++)
         //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(RHorsePrefab.config.PosY[i], RHorsePrefab.config.PosX));
-        //    Instantiate(RHorsePrefab, position, Quaternion.identity);
+        //    GameObject pieceObject = board.AddPiece(RHorsePrefab.gameObject, RHorsePrefab.config.PosY[i], RHorsePrefab.config.PosX);
+        //    red.pieces.Add(pieceObject);
+        //    pieces[RHorsePrefab.config.PosY[i], RHorsePrefab.config.PosX] = pieceObject;
         //}
-        //// Red Rook
-        //for (int i = 0; i < RRookPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(RRookPrefab.config.PosY[i], RRookPrefab.config.PosX));
-        //    Instantiate(RRookPrefab, position, Quaternion.identity);
-        //}
-        //// Red King
-        //for (int i = 0; i < RKingPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(RKingPrefab.config.PosY[i], RKingPrefab.config.PosX));
-        //    Instantiate(RKingPrefab, position, Quaternion.identity);
-        //}
-        //// Black Pawn
-        //for (int i = 0; i < BPawnPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(BPawnPrefab.config.PosY[i], BPawnPrefab.config.PosX));
-        //    Instantiate(BPawnPrefab, position, Quaternion.identity);
-        //}
+        // Red Rook
+        for (int i = 0; i < RRookPrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(RRookPrefab.gameObject, RRookPrefab.config.PosY[i], RRookPrefab.config.PosX);
+            red.pieces.Add(pieceObject);
+            pieces[RRookPrefab.config.PosY[i], RRookPrefab.config.PosX] = pieceObject;
+        }
+        // Red King
+        for (int i = 0; i < RKingPrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(RKingPrefab.gameObject, RKingPrefab.config.PosY[i], RKingPrefab.config.PosX);
+            red.pieces.Add(pieceObject);
+            pieces[RKingPrefab.config.PosY[i], RKingPrefab.config.PosX] = pieceObject;
+        }
+        // Black Pawn
+        for (int i = 0; i < BPawnPrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(BPawnPrefab.gameObject, BPawnPrefab.config.PosY[i], BPawnPrefab.config.PosX);
+            black.pieces.Add(pieceObject);
+            pieces[BPawnPrefab.config.PosY[i], BPawnPrefab.config.PosX] = pieceObject;
+        }
         // Black Cannon
         for (int i = 0; i < BCannonPrefab.config.PosY.Length; i++)
         {
@@ -250,35 +254,37 @@ public class GameManager : MonoBehaviour
             black.pieces.Add(pieceObject);
             pieces[BCannonPrefab.config.PosY[i], BCannonPrefab.config.PosX] = pieceObject;
         }
-        //// Black Advisor
-        //for (int i = 0; i < BAdvisorPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(BAdvisorPrefab.config.PosY[i], BAdvisorPrefab.config.PosX));
-        //    Instantiate(BAdvisorPrefab, position, Quaternion.identity);
-        //}
-        //// Black Elephant
-        //for (int i = 0; i < BElephantPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(BElephantPrefab.config.PosY[i], BElephantPrefab.config.PosX));
-        //    Instantiate(BElephantPrefab, position, Quaternion.identity);
-        //}
+        // Black Advisor
+        for (int i = 0; i < BAdvisorPrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(BAdvisorPrefab.gameObject, BAdvisorPrefab.config.PosY[i], BAdvisorPrefab.config.PosX);
+            black.pieces.Add(pieceObject);
+            pieces[BAdvisorPrefab.config.PosY[i], BAdvisorPrefab.config.PosX] = pieceObject;
+        }
+        // Black Elephant
+        for (int i = 0; i < BElephantPrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(BElephantPrefab.gameObject, BElephantPrefab.config.PosY[i], BElephantPrefab.config.PosX);
+            black.pieces.Add(pieceObject);
+            pieces[BElephantPrefab.config.PosY[i], BElephantPrefab.config.PosX] = pieceObject;
+        }
         //// Black Horse
         //for (int i = 0; i < BHorsePrefab.config.PosY.Length; i++)
         //{
         //    var position = Geometry.PointFromGrid(new Vector2Int(BHorsePrefab.config.PosY[i], BHorsePrefab.config.PosX));
         //    Instantiate(BHorsePrefab, position, Quaternion.identity);
         //}
-        //// Black Rook
-        //for (int i = 0; i < BRookPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(BRookPrefab.config.PosY[i], BRookPrefab.config.PosX));
-        //    Instantiate(BRookPrefab, position, Quaternion.identity);
-        //}
-        ////Black King
-        //for (int i = 0; i < BKingPrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(BKingPrefab.config.PosY[i], BKingPrefab.config.PosX));
-        //    Instantiate(BKingPrefab, position, Quaternion.identity);
-        //}
+        // Black Rook
+        for (int i = 0; i < BRookPrefab.config.PosY.Length; i++)
+        {
+            var position = Geometry.PointFromGrid(new Vector2Int(BRookPrefab.config.PosY[i], BRookPrefab.config.PosX));
+            Instantiate(BRookPrefab, position, Quaternion.identity);
+        }
+        //Black King
+        for (int i = 0; i < BKingPrefab.config.PosY.Length; i++)
+        {
+            var position = Geometry.PointFromGrid(new Vector2Int(BKingPrefab.config.PosY[i], BKingPrefab.config.PosX));
+            Instantiate(BKingPrefab, position, Quaternion.identity);
+        }
     }
 }
