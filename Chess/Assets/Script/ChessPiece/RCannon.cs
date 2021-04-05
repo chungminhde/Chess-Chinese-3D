@@ -13,19 +13,26 @@ public class RCannon : Piece {
             for (int i = 1; i < 11; i++)
             {
                 Vector2Int nextGridPoint = new Vector2Int(gridPoint.x + i * dir.x, gridPoint.y + i * dir.y);
+                if (!GameManager.instance.PieceAtGrid(nextGridPoint))
+                {
+                    locations.Add(nextGridPoint);
+                }
                 if (GameManager.instance.PieceAtGrid(nextGridPoint))
                 {
-                    for (int j = i; j < 11 - i; j++)
+                    for (int j = 1; j < 11 - i; j++)
                     {
-                        Vector2Int nextGridPoint2 = new Vector2Int(gridPoint.x + (i +j)* dir.x, gridPoint.y + (i +j)* dir.y);
+                        Vector2Int nextGridPoint2 = new Vector2Int(gridPoint.x + (i + j)* dir.x, gridPoint.y + (i + j)* dir.y);
                         if (GameManager.instance.PieceAtGrid(nextGridPoint2))
                         {
-                            locations.Add(nextGridPoint);
-                            break;
+                            if (!GameManager.instance.FriendlyPieceAt(nextGridPoint2))
+                            {
+                                locations.Add(nextGridPoint2);
+                                break;
+                            }
                         }
                     }
+                    break;
                 }
-                locations.Add(nextGridPoint);
             }
         }
         return locations;
