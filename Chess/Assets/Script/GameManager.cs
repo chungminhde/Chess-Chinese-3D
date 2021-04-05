@@ -272,12 +272,13 @@ public class GameManager : MonoBehaviour
             black.pieces.Add(pieceObject);
             pieces[BElephantPrefab.config.PosY[i], BElephantPrefab.config.PosX] = pieceObject;
         }
-        //// Black Horse
-        //for (int i = 0; i < BHorsePrefab.config.PosY.Length; i++)
-        //{
-        //    var position = Geometry.PointFromGrid(new Vector2Int(BHorsePrefab.config.PosY[i], BHorsePrefab.config.PosX));
-        //    Instantiate(BHorsePrefab, position, Quaternion.identity);
-        //}
+        // Black Horse
+        for (int i = 0; i < BHorsePrefab.config.PosY.Length; i++)
+        {
+            GameObject pieceObject = board.AddPiece(BHorsePrefab.gameObject, BHorsePrefab.config.PosY[i], BHorsePrefab.config.PosX);
+            black.pieces.Add(pieceObject);
+            pieces[BHorsePrefab.config.PosY[i], BHorsePrefab.config.PosX] = pieceObject;
+        }
         // Black Rook
         for (int i = 0; i < BRookPrefab.config.PosY.Length; i++)
         {
