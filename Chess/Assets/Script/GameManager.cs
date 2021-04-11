@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     public Player currentPlayer;
     public Player otherPlayer;
 
+    public Player HumanSide;
+    public Player AISide;
+
     void Awake()
     {
         instance = this;
@@ -47,6 +50,9 @@ public class GameManager : MonoBehaviour
 
         currentPlayer = red;
         otherPlayer = black;
+
+        HumanSide = red;
+        AISide = HumanSide == red ? black : red;
 
         InitialSetup();
     }
@@ -190,6 +196,11 @@ public class GameManager : MonoBehaviour
         Player tempPlayer = currentPlayer;
         currentPlayer = otherPlayer;
         otherPlayer = tempPlayer;
+    }
+
+    public bool IsAITurn()
+    {
+        return currentPlayer == AISide;
     }
 
     void GenerateChessBoard()

@@ -65,8 +65,14 @@ public class MoveSelector : MonoBehaviour
             tileHighlight.transform.position = Geometry.PointFromGrid(gridPoint);
             if (Input.GetMouseButtonDown(0))
             {
-                // Reference Point 2: check for valid move location
-                 
+                var currentMovingPiecePos = Geometry.GridFromPoint(movingPiece.transform.position);
+                if (Equals(currentMovingPiecePos, gridPoint))   // if click pos = current moving piece pos
+                {                                               // then cancel move
+                    ExitState(true);
+                    return;
+                }
+
+                // Reference Point 2: check for valid move locations
                 if (!moveLocations.Contains(gridPoint))
                 {
                     return;
@@ -82,7 +88,7 @@ public class MoveSelector : MonoBehaviour
                     GameManager.instance.Move(movingPiece, gridPoint);
                 }
                 // Reference Point 3: capture enemy piece here later
-                ExitState();
+                ExitState(false);
             }
         }
         else
@@ -110,12 +116,8 @@ public class MoveSelector : MonoBehaviour
         this.enabled = true;
 
         moveLocations = GameManager.instance.MovesForPiece(movingPiece);
-        foreach(var loc in moveLocations)
-        {
-            Debug.LogError(loc);
-        }
-        locationHighlights = new List<GameObject>();
 
+        locationHighlights = new List<GameObject>();
         if (moveLocations.Count == 0)
         {
             CancelMove();
@@ -136,18 +138,30 @@ public class MoveSelector : MonoBehaviour
         }
     }
 
-    private void ExitState()
+    private void ExitState(bool isCancelMove)
     {
         this.enabled = false;
         TileSelector selector = GetComponent<TileSelector>();
         tileHighlight.SetActive(false);
         GameManager.instance.DeselectPiece(movingPiece);
         movingPiece = null;
-        GameManager.instance.NextPlayer();
+        if (!isCancelMove)
+        {
+            GameManager.instance.NextPlayer();
+            //if (!GameManager.instance.IsAITurn())
+            //{
+            //    selector.EnterState();
+            //    foreach (GameObject highlight in locationHighlights)
+            //    {
+            //        Destroy(highlight);
+            //    }
+            //}
+        }
         selector.EnterState();
         foreach (GameObject highlight in locationHighlights)
         {
             Destroy(highlight);
         }
+
     }
 }
