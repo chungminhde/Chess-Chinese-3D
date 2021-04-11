@@ -148,20 +148,25 @@ public class MoveSelector : MonoBehaviour
         if (!isCancelMove)
         {
             GameManager.instance.NextPlayer();
-            //if (!GameManager.instance.IsAITurn())
-            //{
-            //    selector.EnterState();
-            //    foreach (GameObject highlight in locationHighlights)
-            //    {
-            //        Destroy(highlight);
-            //    }
-            //}
         }
         selector.EnterState();
         foreach (GameObject highlight in locationHighlights)
         {
             Destroy(highlight);
         }
+        if (GameManager.instance.IsAITurn())
+        {
+            GameManager.instance.DoAIMove();
+        }
+
+       
+
+
+        //selector.EnterState();
+        //foreach (GameObject highlight in locationHighlights)
+        //{
+        //    Destroy(highlight);
+        //}
 
     }
 }

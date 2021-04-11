@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
         //    Destroy(board.GetComponent<MoveSelector>());
         //}
         currentPlayer.capturedPieces.Add(pieceToCapture);
+        otherPlayer.pieces.Remove(pieceToCapture);
         pieces[gridPoint.x, gridPoint.y] = null;
         Destroy(pieceToCapture);
     }
@@ -196,11 +197,45 @@ public class GameManager : MonoBehaviour
         Player tempPlayer = currentPlayer;
         currentPlayer = otherPlayer;
         otherPlayer = tempPlayer;
+
     }
 
     public bool IsAITurn()
     {
         return currentPlayer == AISide;
+    }
+
+    public void DoAIMove()
+    {
+
+        /* 
+         insert MiniMax here
+         Minimax should return 
+         - Piece : which piece should move
+         - Vector2Int : grid to move
+          */
+        var listPieces = GetPlayerPieces(currentPlayer);
+        var idx = Random.Range(0, listPieces.Count);
+        var movingPiece = listPieces[idx];
+        var moveLocations = MovesForPiece(movingPiece);
+        var moveIdx = Random.Range(0, moveLocations.Count);
+        var gridPoint = moveLocations[moveIdx];
+        if(GameManager.instance.PieceAtGrid(gridPoint) == null)
+        {
+            
+            GameManager.instance.Move(movingPiece, gridPoint);
+        }
+        else
+        {
+            GameManager.instance.CapturePieceAt(gridPoint);
+            GameManager.instance.Move(movingPiece, gridPoint);
+        }
+        GameManager.instance.NextPlayer();
+    }
+
+    private List<GameObject> GetPlayerPieces(Player player)
+    {
+        return player.pieces;
     }
 
     void GenerateChessBoard()

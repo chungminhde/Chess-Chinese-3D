@@ -9,15 +9,6 @@ public class ChessBoard : MonoBehaviour {
     public Material selectedMaterial;
 
     // Use this for initialization
-
-    void Start () {
-
-    }
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public GameObject AddPiece(GameObject piece, int col, int row)
     {
         Vector2Int gridPoint = Geometry.GridPoint(col, row);
