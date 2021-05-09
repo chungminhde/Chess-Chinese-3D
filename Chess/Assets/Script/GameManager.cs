@@ -335,8 +335,9 @@ public class GameManager : MonoBehaviour
         //Black King
         for (int i = 0; i < BKingPrefab.config.PosY.Length; i++)
         {
-            var position = Geometry.PointFromGrid(new Vector2Int(BKingPrefab.config.PosY[i], BKingPrefab.config.PosX));
-            Instantiate(BKingPrefab, position, Quaternion.identity);
+            GameObject pieceObject = board.AddPiece(BKingPrefab.gameObject, BKingPrefab.config.PosY[i], BKingPrefab.config.PosX);
+            black.pieces.Add(pieceObject);
+            pieces[BKingPrefab.config.PosY[i], BKingPrefab.config.PosX] = pieceObject;
         }
     }
 }
