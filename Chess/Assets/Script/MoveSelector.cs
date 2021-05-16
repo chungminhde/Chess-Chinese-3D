@@ -28,6 +28,7 @@
  * THE SOFTWARE.
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,12 +44,15 @@ public class MoveSelector : MonoBehaviour
     private List<Vector2Int> moveLocations;
     private List<GameObject> locationHighlights;
 
+
     void Start()
     {
         this.enabled = false;
         tileHighlight = Instantiate(tileHighlightPrefab, Geometry.PointFromGrid(new Vector2Int(0, 0)),
             Quaternion.identity, gameObject.transform);
         tileHighlight.SetActive(false);
+
+        GameManager.instance.DeselectEvent += ExitState;
     }
 
     void Update()
@@ -58,6 +62,11 @@ public class MoveSelector : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
+            if (GameManager.instance.isGameOver == true)
+            {
+                return;
+            }
+
             Vector3 point = hit.point;
             Vector2Int gridPoint = Geometry.GridFromPoint(point);
 
@@ -65,7 +74,10 @@ public class MoveSelector : MonoBehaviour
             tileHighlight.transform.position = Geometry.PointFromGrid(gridPoint);
             if (Input.GetMouseButtonDown(0))
             {
+                
+
                 var currentMovingPiecePos = Geometry.GridFromPoint(movingPiece.transform.position);
+    
                 if (Equals(currentMovingPiecePos, gridPoint))   // if click pos = current moving piece pos
                 {                                               // then cancel move
                     ExitState(true);
@@ -140,6 +152,7 @@ public class MoveSelector : MonoBehaviour
 
     private void ExitState(bool isCancelMove)
     {
+
         this.enabled = false;
         TileSelector selector = GetComponent<TileSelector>();
         tileHighlight.SetActive(false);
@@ -150,16 +163,18 @@ public class MoveSelector : MonoBehaviour
             GameManager.instance.NextPlayer();
         }
         selector.EnterState();
-        foreach (GameObject highlight in locationHighlights)
+
+        ClearHightLight();
+
+        if (GameManager.instance.isGameOver == true)
         {
-            Destroy(highlight);
+            return;
         }
+
         if (GameManager.instance.IsAITurn())
         {
             GameManager.instance.DoAIMove();
         }
-
-       
 
 
         //selector.EnterState();
@@ -167,6 +182,15 @@ public class MoveSelector : MonoBehaviour
         //{
         //    Destroy(highlight);
         //}
+
+    }
+
+    private void ClearHightLight()
+    {
+        foreach (GameObject highlight in locationHighlights)
+        {
+            Destroy(highlight);
+        }
 
     }
 }

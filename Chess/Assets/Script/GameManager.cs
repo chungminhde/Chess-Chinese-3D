@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject[,] pieces;
     private List<GameObject> movedPawns;
+    private GameObject currentSelectPiece;
 
     private Player red;
     private Player black;
@@ -36,12 +38,22 @@ public class GameManager : MonoBehaviour
     public Player HumanSide;
     public Player AISide;
 
+    public Action<bool> DeselectEvent;
+
+    public bool isGameOver = false;
+
+
     void Awake()
     {
         instance = this;
     }
 
     void Start()
+    {
+        InitialSetup();
+    }
+
+    private void InitialSetup()
     {
         pieces = new GameObject[9, 11];
 
@@ -53,12 +65,6 @@ public class GameManager : MonoBehaviour
 
         HumanSide = red;
         AISide = HumanSide == red ? black : red;
-
-        InitialSetup();
-    }
-
-    private void InitialSetup()
-    {
         GenerateChessBoard();
     }
 
@@ -119,12 +125,15 @@ public class GameManager : MonoBehaviour
     public void CapturePieceAt(Vector2Int gridPoint)
     {
         GameObject pieceToCapture = PieceAtGrid(gridPoint);
-        //if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
-        //{
-        //    Debug.Log(currentPlayer.name + " wins!");
-        //    Destroy(board.GetComponent<TileSelector>());
-        //    Destroy(board.GetComponent<MoveSelector>());
-        //}
+        if (pieceToCapture.GetComponent<Piece>().config.Name == ChessName.BKing || pieceToCapture.GetComponent<Piece>().config.Name == ChessName.RKing)
+        {
+            Debug.Log(currentPlayer.name + " wins!");
+            UIManager.instance.ShowUI(true);
+            UIManager.instance.SetWinnerText(currentPlayer.name + " wins!");
+            isGameOver = true;
+            //Destroy(board.GetComponent<TileSelector>());
+            //Destroy(board.GetComponent<MoveSelector>());
+        }
         currentPlayer.capturedPieces.Add(pieceToCapture);
         otherPlayer.pieces.Remove(pieceToCapture);
         pieces[gridPoint.x, gridPoint.y] = null;
@@ -133,11 +142,13 @@ public class GameManager : MonoBehaviour
 
     public void SelectPiece(GameObject piece)
     {
+        currentSelectPiece = piece;
         board.SelectPiece(piece);
     }
 
     public void DeselectPiece(GameObject piece)
     {
+        currentSelectPiece = null;
         board.DeselectPiece(piece);
     }
 
@@ -215,10 +226,11 @@ public class GameManager : MonoBehaviour
          - Vector2Int : grid to move
           */
         var listPieces = GetPlayerPieces(currentPlayer);
-        var idx = Random.Range(0, listPieces.Count);
+        var idx = UnityEngine.Random.Range(0, listPieces.Count);
+       
         var movingPiece = listPieces[idx];
         var moveLocations = MovesForPiece(movingPiece);
-        var moveIdx = Random.Range(0, moveLocations.Count);
+        var moveIdx = UnityEngine.Random.Range(0, moveLocations.Count);
         var gridPoint = moveLocations[moveIdx];
         if(GameManager.instance.PieceAtGrid(gridPoint) == null)
         {
@@ -339,5 +351,28 @@ public class GameManager : MonoBehaviour
             black.pieces.Add(pieceObject);
             pieces[BKingPrefab.config.PosY[i], BKingPrefab.config.PosX] = pieceObject;
         }
+    }
+
+    public void RestartGame()
+    {
+        if(currentSelectPiece != null)
+        {
+            DeselectPiece(currentSelectPiece);
+            DeselectEvent.Invoke(true);
+        }
+
+        for (int i =0; i< 9; i++)
+        {
+            for(int j =0; j<11; j++)
+            {
+                Destroy(pieces[i, j]);
+                pieces[i, j] = null;
+            }
+           
+        }
+
+        InitialSetup();
+        UIManager.instance.ShowUI(false);
+        isGameOver = false;
     }
 }

@@ -53,6 +53,10 @@ public class TileSelector : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
+            if (GameManager.instance.isGameOver == true)
+            {
+                return;
+            }
             Vector3 point = hit.point;
             Vector2Int gridPoint = Geometry.GridFromPoint(point);
 
