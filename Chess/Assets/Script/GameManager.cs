@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
     public Action<bool> DeselectEvent;
 
     public bool isGameOver = false;
+    public int INF = 10000;
+
+    public GameObject PieceAIChoose;
+    public Vector2Int PositionAIChoose;
 
 
     void Awake()
@@ -142,6 +146,12 @@ public class GameManager : MonoBehaviour
 
     public void SelectPiece(GameObject piece)
     {
+        var listPiece = GetPlayerPieces(currentPlayer);
+        Debug.Log(GridForPiece(piece));
+        if (!listPiece.Contains(piece))
+        {
+            return;
+        }
         currentSelectPiece = piece;
         board.SelectPiece(piece);
     }
@@ -159,14 +169,14 @@ public class GameManager : MonoBehaviour
 
     public GameObject PieceAtGrid(Vector2Int gridPoint)
     {
-     //   Debug.Log(gridPoint);
+        //   Debug.Log(gridPoint);
         // x = 0 -> 8
         // y = 1 -> 10
         if (gridPoint.x > 8 || gridPoint.y > 10 || gridPoint.x < 0 || gridPoint.y < 1)
         {
             return null;
         }
-       // Debug.LogError(gridPoint);
+        // Debug.LogError(gridPoint);
         return pieces[gridPoint.x, gridPoint.y];
     }
 
@@ -216,8 +226,152 @@ public class GameManager : MonoBehaviour
         return currentPlayer == AISide;
     }
 
+    public int Minimax(int depth, List<GameObject> stateRed, List<GameObject> stateBlack, Boolean maximizingPlayer, int alpha, int beta)
+    {
+        var state = GetState(stateRed, stateBlack);
+        if (depth == 3)
+        {
+            Const conn = GetComponent<Const>();
+            return conn.ValueState(state, maximizingPlayer);
+        }
+
+        if (maximizingPlayer)
+        {
+            var min = -INF;
+            for (int i = 0; i < stateBlack.Count; i++)
+            {
+                var movepiece = MovesForPiece(stateBlack[i]);
+                for (int j = 0; j < movepiece.Count; j++)
+                {
+
+                    Minimax(depth + 1, )
+                }
+            }
+
+        }
+        return 0;
+    }
+
+    private int ValueState(int[,] state, bool maximizingPlayer)
+    {
+        var value_board = 0;
+        // Quân đen
+        if (maximizingPlayer)
+        {
+
+        }
+        // Quân đỏ
+        else
+        {
+
+        }
+        return value_board;
+    }
+
+    public int valueOfFen(int fen)
+    {
+        return 1;
+    }
+    public int[,] GetState(List<GameObject> stateRed, List<GameObject> stateBlack)
+    {
+        int[,] state = { 
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        };
+       
+        for (int i = 0; i < 11; i++)
+        {
+            for (int j = 0; j < 11; j++)
+                state[i, j] = 0;
+        }
+        for (int i = 0; i < stateRed.Count; i++)
+        {
+            var red_piece = stateRed[i];
+            Vector2Int gridPoint = GridForPiece(red_piece);
+
+            if (red_piece.name == "tot_do(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 1;
+            }
+            if (red_piece.name == "tuong_do(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 2;
+            }
+            if (red_piece.name == "sy_do(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 3;
+            }
+            if (red_piece.name == "tinh_do(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 4;
+            }
+            if (red_piece.name == "ma_do(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 5;
+            }
+            if (red_piece.name == "xe_do(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 6;
+            }
+            if (red_piece.name == "phao_do(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 7;
+            }
+        }
+
+        for (int i = 0; i < stateBlack.Count; i++)
+        {
+            var black_piece = stateBlack[i];
+            Vector2Int gridPoint = GridForPiece(black_piece);
+            if (black_piece.name == "tot_den(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 8;
+            }
+            if (black_piece.name == "tuong_den(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 9;
+            }
+            if (black_piece.name == "sy_den(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 10;
+            }
+            if (black_piece.name == "tinh_den(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 11;
+            }
+            if (black_piece.name == "ma_den(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 12;
+            }
+            if (black_piece.name == "xe_den(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 13;
+            }
+            if (black_piece.name == "phao_den(Clone)")
+            {
+                state[gridPoint.y, gridPoint.x] = 14;
+            }
+        }
+
+        return state;
+    }
+    public GameObject[,] FromFen(string fen)
+    {
+        var state = new GameObject[9, 11];
+        return state;
+    }
     public void DoAIMove()
     {
+
 
         /* 
          insert MiniMax here
@@ -226,15 +380,17 @@ public class GameManager : MonoBehaviour
          - Vector2Int : grid to move
           */
         var listPieces = GetPlayerPieces(currentPlayer);
+        var stateRed = GetPlayerPieces(otherPlayer);
+        var stateBlack = GetPlayerPieces(currentPlayer);
+        //Minimax(3, stateRed, stateBlack, true, 0, 0);
         var idx = UnityEngine.Random.Range(0, listPieces.Count);
-       
         var movingPiece = listPieces[idx];
         var moveLocations = MovesForPiece(movingPiece);
         var moveIdx = UnityEngine.Random.Range(0, moveLocations.Count);
         var gridPoint = moveLocations[moveIdx];
-        if(GameManager.instance.PieceAtGrid(gridPoint) == null)
+        if (GameManager.instance.PieceAtGrid(gridPoint) == null)
         {
-            
+
             GameManager.instance.Move(movingPiece, gridPoint);
         }
         else
@@ -355,20 +511,20 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        if(currentSelectPiece != null)
+        if (currentSelectPiece != null)
         {
             DeselectPiece(currentSelectPiece);
             DeselectEvent.Invoke(true);
         }
 
-        for (int i =0; i< 9; i++)
+        for (int i = 0; i < 9; i++)
         {
-            for(int j =0; j<11; j++)
+            for (int j = 0; j < 11; j++)
             {
                 Destroy(pieces[i, j]);
                 pieces[i, j] = null;
             }
-           
+
         }
 
         InitialSetup();
