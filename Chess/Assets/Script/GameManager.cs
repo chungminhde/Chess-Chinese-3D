@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public int INF = 10000;
 
     public GameObject PieceAIChoose;
-    public Vector2Int PositionAIChoose;
+    public Vector2Int PosAIChoose;
 
 
     void Awake()
@@ -237,24 +237,74 @@ public class GameManager : MonoBehaviour
 
         if (maximizingPlayer)
         {
-            var min = -INF;
+            
+            var best = -INF;
             for (int i = 0; i < stateBlack.Count; i++)
             {
+                if (depth == 1)
+                {
+                    PieceAIChoose = stateBlack[i];
+                }
+                var tempPiece = stateBlack[i];
                 var movepiece = MovesForPiece(stateBlack[i]);
-                PieceAIChoose = stateBlack[i];
+                var tempPos = GridForPiece(stateBlack[i]);
+                var val = 0;
                 for (int j = 0; j < movepiece.Count; j++)
                 {
-                   
+                    var move = movepiece[j];
+                    pieces[tempPos.x, tempPos.y] = null;
+                    pieces[move.x, move.y] = stateBlack[i];
+                    var stateR = GetPlayerPieces(otherPlayer);
+                    var stateB = GetPlayerPieces(currentPlayer);
+                    val = Minimax(depth + 1, stateR, stateB, false, alpha, beta);
+                    best = Math.Max(best, val);
+                    if (best > alpha && depth == 1)
+                    {
+                        PosAIChoose = movepiece[j];
+                    }
+                    alpha = Math.Max(alpha, best);
+                    pieces[move.x, move.y] = null;
+                    if (beta <= alpha)
+                    {
+                        break;
+                    }
+
                 }
+                pieces[tempPos.x, tempPos.y] = tempPiece;
             }
 
         }
         else
         {
+            var best = INF;
+            for (int i = 0; i < stateRed.Count; i++)
+            {
+                var tempPiece = stateRed[i];
+                var movepiece = MovesForPiece(stateRed[i]);
+                var tempPos = GridForPiece(stateRed[i]);
+                var val = 0;
+                for (int j = 0; j < movepiece.Count; j++)
+                {
+                    var move = movepiece[j];
+                    pieces[tempPos.x, tempPos.y] = null;
+                    pieces[move.x, move.y] = stateBlack[i];
+                    var stateR = GetPlayerPieces(otherPlayer);
+                    var stateB = GetPlayerPieces(currentPlayer);
+                    val = Minimax(depth + 1, stateR, stateB, true, alpha, beta);
+                    best = Math.Min(best, val);
+                    alpha = Math.Min(beta, best);
+                    pieces[move.x, move.y] = null;
+                    if (beta <= alpha)
+                    {
+                        break;
+                    }
 
+                }
+                pieces[tempPos.x, tempPos.y] = tempPiece;
+            }
         }
-       
-        return 0;
+
+        return 1;
     }
 
     public int[,] GetState(List<GameObject> stateRed, List<GameObject> stateBlack)
@@ -363,14 +413,16 @@ public class GameManager : MonoBehaviour
         var listPieces = GetPlayerPieces(currentPlayer);
         var stateRed = GetPlayerPieces(otherPlayer);
         var stateBlack = GetPlayerPieces(currentPlayer);
-        //Minimax(3, stateRed, stateBlack, true, 0, 0);
+        Minimax(3, stateRed, stateBlack, true, 0, 0);
         var state = GetState(stateRed, stateBlack);
         Debug.Log(state[1, 4]);
-        var idx = UnityEngine.Random.Range(0, listPieces.Count);
-        var movingPiece = listPieces[idx];
-        var moveLocations = MovesForPiece(movingPiece);
-        var moveIdx = UnityEngine.Random.Range(0, moveLocations.Count);
-        var gridPoint = moveLocations[moveIdx];
+        //var idx = UnityEngine.Random.Range(0, listPieces.Count);
+        //var movingPiece = listPieces[idx];
+        //var moveLocations = MovesForPiece(movingPiece);
+        //var moveIdx = UnityEngine.Random.Range(0, moveLocations.Count);
+        //var gridPoint = moveLocations[moveIdx];
+        var movingPiece = PieceAIChoose;
+        var gridPoint = PosAIChoose;
         if (GameManager.instance.PieceAtGrid(gridPoint) == null)
         {
 
