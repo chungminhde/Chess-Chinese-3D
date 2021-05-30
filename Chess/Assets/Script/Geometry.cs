@@ -11,7 +11,7 @@ public class Geometry {
     {
         
         float x = -3.5f + 0.875f * (float)gridPoint.x;
-        float z =  1.0f * gridPoint.y;
+        float z =  1.01f * gridPoint.y;
         return new Vector3(x, 0.17f, z);
     }
 

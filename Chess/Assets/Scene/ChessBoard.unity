@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -233,6 +233,30 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114610211396067754, guid: a30810d5e0ad36d4ebff58fcd4d7b928,
+        type: 2}
+      propertyPath: attackLocationPrefab
+      value: 
+      objectReference: {fileID: 1632094049687614, guid: cd6dd2b8b03129845b32e100d2eb7711,
+        type: 2}
+    - target: {fileID: 114610211396067754, guid: a30810d5e0ad36d4ebff58fcd4d7b928,
+        type: 2}
+      propertyPath: moveLocationPrefab
+      value: 
+      objectReference: {fileID: 1475627344470174, guid: 40754d4e83a40054b99f9a80992646d5,
+        type: 2}
+    - target: {fileID: 114610211396067754, guid: a30810d5e0ad36d4ebff58fcd4d7b928,
+        type: 2}
+      propertyPath: tileHighlightPrefab
+      value: 
+      objectReference: {fileID: 1554491511828526, guid: 9a7c73bc6b80a7647b58318dda0948d9,
+        type: 2}
+    - target: {fileID: 114974615967373180, guid: a30810d5e0ad36d4ebff58fcd4d7b928,
+        type: 2}
+      propertyPath: tileHighlightPrefab
+      value: 
+      objectReference: {fileID: 1554491511828526, guid: 9a7c73bc6b80a7647b58318dda0948d9,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a30810d5e0ad36d4ebff58fcd4d7b928, type: 2}
   m_IsPrefabParent: 0
@@ -311,6 +335,7 @@ MonoBehaviour:
     type: 2}
   BCannonPrefab: {fileID: 114914900700768770, guid: c7e82071cc551dc4dab0e76e75710c2a,
     type: 2}
+  isGameOver: 0
 --- !u!1001 &1515456109
 Prefab:
   m_ObjectHideFlags: 0

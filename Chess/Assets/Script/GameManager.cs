@@ -241,37 +241,22 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < stateBlack.Count; i++)
             {
                 var movepiece = MovesForPiece(stateBlack[i]);
+                PieceAIChoose = stateBlack[i];
                 for (int j = 0; j < movepiece.Count; j++)
                 {
-
-                    Minimax(depth + 1, )
+                   
                 }
             }
 
         }
-        return 0;
-    }
-
-    private int ValueState(int[,] state, bool maximizingPlayer)
-    {
-        var value_board = 0;
-        // Quân đen
-        if (maximizingPlayer)
-        {
-
-        }
-        // Quân đỏ
         else
         {
 
         }
-        return value_board;
+       
+        return 0;
     }
 
-    public int valueOfFen(int fen)
-    {
-        return 1;
-    }
     public int[,] GetState(List<GameObject> stateRed, List<GameObject> stateBlack)
     {
         int[,] state = { 
@@ -364,15 +349,11 @@ public class GameManager : MonoBehaviour
 
         return state;
     }
-    public GameObject[,] FromFen(string fen)
-    {
-        var state = new GameObject[9, 11];
-        return state;
-    }
+
     public void DoAIMove()
     {
 
-
+        // temp 
         /* 
          insert MiniMax here
          Minimax should return 
@@ -383,6 +364,8 @@ public class GameManager : MonoBehaviour
         var stateRed = GetPlayerPieces(otherPlayer);
         var stateBlack = GetPlayerPieces(currentPlayer);
         //Minimax(3, stateRed, stateBlack, true, 0, 0);
+        var state = GetState(stateRed, stateBlack);
+        Debug.Log(state[1, 4]);
         var idx = UnityEngine.Random.Range(0, listPieces.Count);
         var movingPiece = listPieces[idx];
         var moveLocations = MovesForPiece(movingPiece);
